@@ -1,4 +1,4 @@
-public enum ColorEnum
+public enum ColorEnum        // Enum values to organize and set the order
 {
     Red = 0,
     Orange = 1,

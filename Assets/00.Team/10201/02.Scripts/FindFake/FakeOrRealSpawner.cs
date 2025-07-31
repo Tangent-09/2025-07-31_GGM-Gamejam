@@ -2,10 +2,12 @@ using UnityEngine;
 
 public class FakeOrRealSpawner : MonoBehaviour
 {
+    #region Variables
     [SerializeField] private GameObject _realPrefab, _fakePrefab;              // Real and Fake Prefabs
     [SerializeField] private SpawnManager _spawnManager;                       // SpawnManager
     private int _fakeObjectId;                                                 // Id for Fake Object Randomizer
-
+    #endregion
+    #region LifeCycle
     private void Start()
     {
         _fakeObjectId = Random.Range(0, _spawnManager.SpawnPos.Length);        // Get Randomized Id for Fake Object
@@ -27,4 +29,5 @@ public class FakeOrRealSpawner : MonoBehaviour
             }
         }
     }
+    #endregion
 }

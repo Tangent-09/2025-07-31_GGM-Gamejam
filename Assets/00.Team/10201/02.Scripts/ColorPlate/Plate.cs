@@ -5,10 +5,13 @@ using UnityEngine;
 
 public class Plate : MonoBehaviour
 {
+    #region Variables
     [SerializeField] private PlateManager _plateManager; //PlateManager
 
     [SerializeField] private ColorEnum color; //Colors
 
+    #endregion
+    #region Physics
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (_plateManager.currentColorId == Convert.ToInt32(color)) // if: CorrectOrder
@@ -16,4 +19,5 @@ public class Plate : MonoBehaviour
         else                                                        // if: WrongOrder
             _plateManager.ColorReset();                                 // Reset
     }
+    #endregion
 }

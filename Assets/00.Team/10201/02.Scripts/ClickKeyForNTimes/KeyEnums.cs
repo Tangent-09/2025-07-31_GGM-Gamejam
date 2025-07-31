@@ -22,4 +22,4 @@ public enum KeyEnum
     B,
     N,
     M
-}
+}                 // List of key enum values (0 ~ 21)
