@@ -2,5 +2,5 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    [field: SerializeField] public Transform[] SpawnPos { get; private set; }
+    [field: SerializeField] public Transform[] SpawnPos { get; private set; } // Spawn Positions
 }
