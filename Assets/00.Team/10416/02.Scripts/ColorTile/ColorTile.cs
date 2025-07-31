@@ -16,7 +16,7 @@ public class ColorTile : MonoBehaviour
     private void OnMouseEnter()
     {
         canClick = true;
-    }//gameObject위에 마우스포인트가 있는지 확인
+    }//Check if the mouse cursor is over a game object
     private void OnMouseExit()
     {
         canClick = false;
@@ -24,7 +24,7 @@ public class ColorTile : MonoBehaviour
 
     private void Update()
     {
-      if(canClick&&Mouse.current.leftButton.wasPressedThisFrame)//타일을 눌렀을 시 답 값을 본인 값으로 바꿈
+      if(canClick&&Mouse.current.leftButton.wasPressedThisFrame)//When you press a tile, the answer value changes to your own value.
         {
             colorOrderer.CheckIt = true;
             colorOrderer.InputNum = colorNum;

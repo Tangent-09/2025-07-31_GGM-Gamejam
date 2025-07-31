@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class ColorOrderer : MonoBehaviour
 {
-    private int orderNum;
-    public int InputNum { get; set; }
-    public bool CheckIt { get; set; }
+    private int orderNum;//Correct Color's Number
+    public int InputNum { get; set; }//Player's answer
+    public bool CheckIt { get; set; }//A boolean value to check if the answer is correct only once when pressed
     private SpriteRenderer spriteRenderer;
 
     private void Awake()
