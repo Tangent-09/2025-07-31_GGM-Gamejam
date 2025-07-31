@@ -19,4 +19,8 @@ public class PlayerMovement : MonoBehaviour
         Vector2 move = playerInput.MovementInput;
         rb.MovePosition(rb.position + move * speed * Time.fixedDeltaTime);
     }
+    public float GetSpeed()
+    {
+        return speed;
+    }
 }
