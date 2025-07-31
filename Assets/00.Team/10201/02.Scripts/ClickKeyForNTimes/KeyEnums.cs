@@ -1,0 +1,25 @@
+public enum KeyEnum
+{
+    Q,
+    E,
+    R,
+    T,
+    Y,
+    U,
+    I,
+    O,
+    P,
+    F,
+    G,
+    H,
+    J,
+    K,
+    L,
+    Z,
+    X,
+    C,
+    V,
+    B,
+    N,
+    M
+}
