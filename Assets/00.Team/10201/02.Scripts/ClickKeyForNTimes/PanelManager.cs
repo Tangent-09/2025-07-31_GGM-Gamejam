@@ -6,7 +6,7 @@ public class PanelManager : MonoBehaviour
 
     private void Awake()
     {
-        _missionPanel.SetActive(false);
+        _missionPanel.SetActive(false);                                                  // Disable Panel UI on awake
     }
 
     public void SetMissionPanelActive(bool value) => _missionPanel.SetActive(value);     // Mission Panel Method

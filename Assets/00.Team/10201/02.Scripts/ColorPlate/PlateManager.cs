@@ -2,16 +2,18 @@ using UnityEngine;
 
 public class PlateManager : MonoBehaviour
 {
+    #region Variables
     public int currentColorId { get; private set; } // CurrentOrder
     [SerializeField] private int plateCount;        // Count of Plates
     [SerializeField] private GameObject[] plates;   // Plate Index
-
+    #endregion
+    #region Public Methods
     public void ColorProgress()                     // if: Right Order
     {
         plates[currentColorId].SetActive(false);    // Disable Plate
         currentColorId++;                           // NextOrder
         if (currentColorId == plateCount)           // if: Every Order is done, Mission Complete
-            Debug.Log("Mission Complete");          
+            Debug.Log("Mission Complete");          // [TEMP] log mission complete
     }
 
     public void ColorReset()                        // if: Wrong Order
@@ -19,6 +21,7 @@ public class PlateManager : MonoBehaviour
         for (int i = currentColorId; i >= 0; i--)   // Enable Every disabled plates
             plates[i].SetActive(true); 
         currentColorId = 0;                         // Order Reset
-        Debug.Log("Oh no!");
+        Debug.Log("Oh no!");                        // [TEMP] log fail
     }
+    #endregion
 }

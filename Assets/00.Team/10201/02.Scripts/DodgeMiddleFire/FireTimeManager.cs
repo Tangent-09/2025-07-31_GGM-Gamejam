@@ -8,6 +8,12 @@ public class FireTimeManager : MonoBehaviour
     public int fireInvTime { get; private set; } = 3;               // Fire Invisible Time(Duration)
     public int fireDelayTime { get; private set; } = 2;             // Fire Delay Time(Warning Duration)
     #endregion
+    #region LifeCycle
+    private void OnDestroy()                                        // On Destroy, stop all Coroutines to prevent anything bad
+    {
+        StopAllCoroutines();
+    }
+    #endregion
     #region Method
     public void StartCountdown()                             // Method to help other manager to initiate Countdown
     {

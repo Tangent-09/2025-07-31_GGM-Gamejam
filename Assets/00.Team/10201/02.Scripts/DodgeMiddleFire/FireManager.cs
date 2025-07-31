@@ -37,6 +37,10 @@ public class FireManager : MonoBehaviour
             StartCoroutine(FireChariot());                                    // and enable the CHARIOT
         }
     }
+    private void OnDestroy()                                                  // On Destroy, Stop all Coroutines to prevent anything bad
+    {
+        StopAllCoroutines();
+    }
     #endregion
     #region Methods
     private void ReadyFire()
