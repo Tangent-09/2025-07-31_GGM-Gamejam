@@ -2,45 +2,52 @@ using UnityEngine;
 
 public class ZoneChecker : MonoBehaviour
 {
-     [Header("대상")]
-    [SerializeField] private Transform player;           // 플레이어 트랜스폼
-    [SerializeField] private Collider2D zoneArea;        // 체크할 구역 (예: 빨간 사각형 콜라이더)
+    [Header("Target")]
+[SerializeField] private Transform player;           // Reference to the player's transform
+[SerializeField] private Collider2D zoneArea;        // Area to check (e.g., a red rectangular trigger zone)
 
-    [Header("증가/감소 속도")]
-    [SerializeField] private float increaseSpeed = 0.1f; // 구역 안일 때 증가 속도
-    [SerializeField] private float decreaseSpeed = 0.1f; // 구역 밖일 때 감소 속도
+[Header("Increase/Decrease Speed")]
+[SerializeField] private float increaseSpeed = 0.1f; // Speed at which the gauge increases inside the zone
+[SerializeField] private float decreaseSpeed = 0.1f; // Speed at which the gauge decreases outside the zone
 
-    [Header("게이지 설정")]
-    [SerializeField] private float maxValue = 50f;       // 최대 게이지 값
+[Header("Gauge Settings")]
+[SerializeField] private float maxValue = 50f;       // Maximum value the gauge can reach
 
-    private float currentValue = 0f;
-    private bool isCleared = false;
+private float currentValue = 0f;     // Current gauge value
+private bool isCleared = false;     // Whether the gauge has been filled completely
 
-    private void Update()
+private void Update()
+{
+    // Convert the player's 3D position to 2D (ignore Z)
+    Vector2 playerPos2D = new Vector2(player.position.x, player.position.y);
+
+    // Check if the player's position is inside the zone collider
+    if (zoneArea.OverlapPoint(playerPos2D))
     {
-        Vector2 playerPos2D = new Vector2(player.position.x, player.position.y);
-
-        if (zoneArea.OverlapPoint(playerPos2D))
-        {
-            currentValue += increaseSpeed;
-        }
-        else
-        {
-            currentValue -= decreaseSpeed;
-        }
-
-        currentValue = Mathf.Clamp(currentValue, 0f, maxValue);
-
-        if (!isCleared && currentValue >= maxValue)
-        {
-            isCleared = true;
-            Debug.Log("클리어!");
-        }
-
-        Debug.Log("현재 값: " + currentValue.ToString("F1"));
+        // Increase gauge if player is inside the zone
+        currentValue += increaseSpeed;
+    }
+    else
+    {
+        // Decrease gauge if player is outside the zone
+        currentValue -= decreaseSpeed;
     }
 
-    // 외부에서 게이지 값을 가져갈 수 있게 (선택사항)
+    // Clamp the value so it stays within 0 and maxValue
+    currentValue = Mathf.Clamp(currentValue, 0f, maxValue);
+
+    // Check if the gauge has reached its maximum for the first time
+    if (!isCleared && currentValue >= maxValue)
+    {
+        isCleared = true;
+        Debug.Log("Cleared!");
+    }
+
+    // Debug the current gauge value to the console
+    Debug.Log("Current Value: " + currentValue.ToString("F1"));
+}
+
+    // Optional: public method to retrieve the current gauge value
     public float GetValue()
     {
         return currentValue;

@@ -2,41 +2,46 @@ using UnityEngine;
 
 public class WallSpawner : MonoBehaviour
 {
-   [Header("벽과 구멍 프리팹")]
-    [SerializeField] private GameObject wallPrefab;
-    [SerializeField] private GameObject holePrefab;
+   [Header("Wall and Hole Prefabs")]
+[SerializeField] private GameObject wallPrefab; // Prefab for the wall
+[SerializeField] private GameObject holePrefab; // Prefab for the hole
 
-    [Header("스폰 설정")]
-    [SerializeField] private float spawnInterval = 1.5f;
-    [SerializeField] private Transform spawnPoint;
+[Header("Spawn Settings")]
+[SerializeField] private float spawnInterval = 1.5f; // Time interval between each spawn
+[SerializeField] private Transform spawnPoint; // Position where walls and holes will be spawned
 
-    [Header("구멍 위치 랜덤 범위 (Y축)")]
-    [SerializeField] private float minHoleY = -2.5f;
-    [SerializeField] private float maxHoleY = 2.5f;
+[Header("Random Range for Hole Position (Y axis)")]
+[SerializeField] private float minHoleY = -2.5f; // Minimum Y position for the hole
+[SerializeField] private float maxHoleY = 2.5f;  // Maximum Y position for the hole
 
-    private float timer = 0f;
+private float timer = 0f; // Timer to track time between spawns
 
-    void Update()
+void Update()
+{
+    // Accumulate time since last frame
+    timer += Time.deltaTime;
+
+    // Check if it's time to spawn a new wall and hole
+    if (timer >= spawnInterval)
     {
-        timer += Time.deltaTime;
-
-        if (timer >= spawnInterval)
-        {
-            SpawnWallWithHole();
-            timer = 0f;
-        }
+        SpawnWallWithHole();
+        timer = 0f; // Reset the timer after spawning
     }
+}
 
-    void SpawnWallWithHole()
-    {
-        // 벽 생성
-        GameObject wall = Instantiate(wallPrefab, spawnPoint.position, Quaternion.identity);
+void SpawnWallWithHole()
+{
+    // Instantiate the wall at the spawn point
+    GameObject wall = Instantiate(wallPrefab, spawnPoint.position, Quaternion.identity);
 
-        // 구멍 생성
-        float holeY = Random.Range(minHoleY, maxHoleY);
-        Vector3 holePosition = wall.transform.position + new Vector3(0f, holeY, 0f);
+    // Determine a random Y position for the hole
+    float holeY = Random.Range(minHoleY, maxHoleY);
+    Vector3 holePosition = wall.transform.position + new Vector3(0f, holeY, 0f);
 
-        GameObject hole = Instantiate(holePrefab, holePosition, Quaternion.identity);
-        hole.transform.SetParent(wall.transform); // 벽 자식으로 붙이기
-    }
+    // Instantiate the hole at the calculated position
+    GameObject hole = Instantiate(holePrefab, holePosition, Quaternion.identity);
+
+    // Make the hole a child of the wall (so they move together, for example)
+    hole.transform.SetParent(wall.transform);
+}
 }
