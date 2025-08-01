@@ -35,19 +35,15 @@ public class PlayerAnimation : MonoBehaviour
         {
             animator.SetBool(moveBack, true);
             animator.SetBool(moveFront, false);
-            animator.SetBool(moveSide, false);
         }
         else if (moveDir.y < 0)
         {
             animator.SetBool(moveFront, true);
             animator.SetBool(moveBack, false);
-            animator.SetBool(moveSide, false);
         }
         else if (moveDir.y == 0 && moveDir.x != 0)
         {
             animator.SetBool(moveSide, true);
-            animator.SetBool(moveBack, false);
-            animator.SetBool(moveFront, false);
         }
         else
         {

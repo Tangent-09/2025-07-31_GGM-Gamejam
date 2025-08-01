@@ -2,46 +2,28 @@ using UnityEngine;
 
 public class WallSpawner : MonoBehaviour
 {
-   [Header("Wall and Hole Prefabs")]
-[SerializeField] private GameObject wallPrefab; // Prefab for the wall
-[SerializeField] private GameObject holePrefab; // Prefab for the hole
+    [Header("Wall Prefab")]
+    [SerializeField] private GameObject wallPrefab; // 구멍이 포함된 벽 프리팹
 
-[Header("Spawn Settings")]
-[SerializeField] private float spawnInterval = 1.5f; // Time interval between each spawn
-[SerializeField] private Transform spawnPoint; // Position where walls and holes will be spawned
+    [Header("Spawn Settings")]
+    [SerializeField] private float spawnInterval = 1.5f; // 생성 간격
+    [SerializeField] private Transform spawnPoint;       // 생성 위치
 
-[Header("Random Range for Hole Position (Y axis)")]
-[SerializeField] private float minHoleY = -2.5f; // Minimum Y position for the hole
-[SerializeField] private float maxHoleY = 2.5f;  // Maximum Y position for the hole
+    private float timer = 0f;
 
-private float timer = 0f; // Timer to track time between spawns
-
-void Update()
-{
-    // Accumulate time since last frame
-    timer += Time.deltaTime;
-
-    // Check if it's time to spawn a new wall and hole
-    if (timer >= spawnInterval)
+    void Update()
     {
-        SpawnWallWithHole();
-        timer = 0f; // Reset the timer after spawning
+        timer += Time.deltaTime;
+
+        if (timer >= spawnInterval)
+        {
+            SpawnWall();
+            timer = 0f;
+        }
     }
-}
 
-void SpawnWallWithHole()
-{
-    // Instantiate the wall at the spawn point
-    GameObject wall = Instantiate(wallPrefab, spawnPoint.position, Quaternion.identity);
-
-    // Determine a random Y position for the hole
-    float holeY = Random.Range(minHoleY, maxHoleY);
-    Vector3 holePosition = wall.transform.position + new Vector3(0f, holeY, 0f);
-
-    // Instantiate the hole at the calculated position
-    GameObject hole = Instantiate(holePrefab, holePosition, Quaternion.identity);
-
-    // Make the hole a child of the wall (so they move together, for example)
-    hole.transform.SetParent(wall.transform);
-}
+    void SpawnWall()
+    {
+        Instantiate(wallPrefab, spawnPoint.position, Quaternion.identity);
+    }
 }
