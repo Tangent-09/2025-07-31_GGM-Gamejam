@@ -7,14 +7,14 @@ public class ShapeObject : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        print("감지" + collision.gameObject.name);
+        print("Zone" + collision.gameObject.name);
 
-        if (TryGetComponent(out ShapeZone shapeZone))
+        if (collision.gameObject.TryGetComponent(out ShapeZone shapeZone))
         {
             if (ShapeMatchManager.Instance.ShapeMatch(colorType, shapeZone.objectColor))
-                print("매치 성공!");
+                print("Match!");
             else
-                print("이 딴 걸 매치 라 고 해???????");
+                print("MissMatch!");
         }
         else
         {
