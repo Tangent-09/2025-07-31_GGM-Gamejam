@@ -6,7 +6,7 @@ public class Tracker : MonoBehaviour
     [SerializeField] private float followMultiplier = 0.5f; // Multiplier to control how fast this object follows the player
 
     private Rigidbody2D rb; // Reference to this object's Rigidbody2D component
-    private PlayerMovement playerMovement; // Reference to the player's movement script
+    private PlayerMovement_1 playerMovement; // Reference to the player's movement script
 
     void Start()
     {
@@ -16,7 +16,7 @@ public class Tracker : MonoBehaviour
         // If the player Transform is assigned, get the PlayerMovement component from it
         if (player != null)
         {
-            playerMovement = player.GetComponent<PlayerMovement>();
+            playerMovement = player.GetComponent<PlayerMovement_1>();
         }
     }
 

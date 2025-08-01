@@ -1,16 +1,17 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class WallScale : MonoBehaviour
 {
     #region Values
     [SerializeField] private bool isTopWall;
     [SerializeField] private bool isBottomWall;
-    [SerializeField] private bool isLeftWall;
-    [SerializeField] private bool isRightWall;
 
     [SerializeField] private float changeScaleValue;
 
     [SerializeField] private bool canScaleChanage = true;
+    [SerializeField] private float addScale;
     #endregion
     #region Default Methods
     private void Start()
@@ -18,10 +19,14 @@ public class WallScale : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         CheckPos();
     }
-
+    private void Update()
+    {
+        if (Keyboard.current.eKey.wasPressedThisFrame)
+            WallScaleIncreaseChanage(addScale);
+    }
     private void FixedUpdate()
     {
-        WallScaleChanage();
+        WallScaleDecreaseChanage();
     }
     #endregion
     #region Wall Methods
@@ -29,21 +34,14 @@ public class WallScale : MonoBehaviour
     {
         //Wall Pos Check
         float yPos = transform.position.y;
-        float xPos = transform.position.x;
         #region Check Ypos
         if (yPos >= 4)
             isTopWall = true;
         else if (yPos < 0)
             isBottomWall = true;
         #endregion
-        #region Check Xpos
-        else if (xPos < 0)
-            isLeftWall = true;
-        else if (xPos >= 8)
-            isRightWall = true;
-        #endregion
     }
-    private void WallScaleChanage()
+    private void WallScaleDecreaseChanage()
     {
         //Chanage Wall Scale
         if (!canScaleChanage)
@@ -62,35 +60,63 @@ public class WallScale : MonoBehaviour
             scale.y += changeScaleValue;
             pos.y += changeScaleValue / 2f;
         }
-        else if (isLeftWall)
-        {
-            scale.x += changeScaleValue;
-            pos.x += changeScaleValue / 2f;
-        }
-        else if (isRightWall)
-        {
-            scale.x += changeScaleValue;
-            pos.x -= changeScaleValue / 2f;
-        }
         #endregion
         transform.localScale = scale;
         transform.position = pos;
 
         GameoverScaleCheck(scale);
     }
+    public void WallScaleIncreaseChanage(float addScale)
+    {
+        StartCoroutine(ScaleIncrease(addScale));
+    }
     private void GameoverScaleCheck(Vector3 scale)
     {
         //Gameover check
         if ((isTopWall || isBottomWall) && scale.y >= 5.5f)
         {
-            print("움직임 중지" + gameObject.name);
             canScaleChanage = false;
+            print("GMAE OVER");
         }
-        else if ((isLeftWall || isRightWall) && scale.x >= 9f)
+    }
+    IEnumerator ScaleIncrease(float addScale)
+    {
+        Vector3 scale = transform.localScale;
+        Vector3 pos = transform.position;
+        float targetScaleY = scale.y - addScale;
+
+        canScaleChanage = false;
+
+        while (transform.localScale.y > targetScaleY)
         {
-            print("움직임 중지" + gameObject.name);
-            canScaleChanage = false;
+            #region Scale Chanage
+            if (isTopWall)
+            {
+                if (scale.y - 0.05f < 0)
+                    break;
+
+                scale.y -= 0.05f;
+                pos.y += 0.05f / 2f;
+            }
+            else if (isBottomWall)
+            {
+                if (scale.y - 0.05f < 0)
+                    break;
+
+                scale.y -= 0.05f;
+                pos.y -= 0.05f / 2f;
+            }
+            #endregion
+
+            transform.localScale = scale;
+            transform.position = pos;
+
+            yield return null;
         }
+
+        yield return new WaitForSeconds(0.2f);
+
+        canScaleChanage = true;
     }
     #endregion
 }
