@@ -9,7 +9,7 @@ public class mud_road : MonoBehaviour
     // Check if the player entered the trigger zone
         if (other.CompareTag("Player"))
         {
-            PlayerMovement player = other.GetComponent<PlayerMovement>();
+            PlayerMovement_1 player = other.GetComponent<PlayerMovement_1>();
             if (player != null)
             {
                 // Apply slow effect
@@ -23,7 +23,7 @@ public class mud_road : MonoBehaviour
          // Check if the player exited the trigger zone
         if (other.CompareTag("Player"))
         {
-            PlayerMovement player = other.GetComponent<PlayerMovement>();
+            PlayerMovement_1 player = other.GetComponent<PlayerMovement_1>();
             if (player != null)
             {
                 // Restore normal speed

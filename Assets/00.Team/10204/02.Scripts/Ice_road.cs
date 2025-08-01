@@ -4,7 +4,7 @@ public class Ice_road : MonoBehaviour
 {
      private void OnTriggerEnter2D(Collider2D other)
     {
-        PlayerMovement player = other.GetComponent<PlayerMovement>();
+        PlayerMovement_1 player = other.GetComponent<PlayerMovement_1>();
         if (player != null)
         {
             player.SetOnIce(true);
@@ -13,7 +13,7 @@ public class Ice_road : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        PlayerMovement player = other.GetComponent<PlayerMovement>();
+        PlayerMovement_1 player = other.GetComponent<PlayerMovement_1>();
         if (player != null)
         {
             player.SetOnIce(false);

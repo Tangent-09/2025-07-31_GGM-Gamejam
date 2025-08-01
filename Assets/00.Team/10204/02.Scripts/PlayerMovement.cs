@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(MyPlayerInput))]
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement_1 : MonoBehaviour
 {
      [SerializeField] private float speed = 5f; // Base movement speed
 [SerializeField, Range(0f, 1f)] private float iceFriction = 0.98f; // Sliding friction on ice (closer to 1 = more slippery)
