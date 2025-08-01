@@ -4,7 +4,7 @@ public class Missile : MonoBehaviour
 {
      private Transform player;                         // Reference to player's transform
     private Rigidbody2D rb;                           // Rigidbody2D component for movement
-    private PlayerMovement playerMovement;            // Reference to player's movement script
+    private PlayerMovement_1 playerMovement;            // Reference to player's movement script
 
     [SerializeField] private float followMultiplier = 1f / 3f; // Follower speed ratio relative to player speed
 
@@ -16,7 +16,7 @@ public class Missile : MonoBehaviour
     if (playerObj != null)
     {
         player = playerObj.transform;             // Cache player's transform
-        playerMovement = player.GetComponent<PlayerMovement>(); // Get player's movement script
+        playerMovement = player.GetComponent<PlayerMovement_1>(); // Get player's movement script
     }
 }
 

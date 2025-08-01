@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(MyPlayerInput))]
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement_1 : MonoBehaviour
 {
     [SerializeField] private float speed = 5f; // Movement speed of the player, editable in the Inspector
 
