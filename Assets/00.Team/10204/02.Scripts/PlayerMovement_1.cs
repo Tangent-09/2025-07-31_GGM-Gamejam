@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(MyPlayerInput))]
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement_1 : MonoBehaviour
 {
     [SerializeField] private float speed = 5f;
     [SerializeField, Range(0f, 1f)] private float iceFriction = 0.98f; // 미끄러짐 강도 (1에 가까울수록 오래 미끄러짐)
